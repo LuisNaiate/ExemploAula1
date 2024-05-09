@@ -9,6 +9,7 @@ public class controlerplayes : MonoBehaviour
      public float horizontal;
     bool groundCheck;
     public Transform foot;
+    public Animator anim;
     void Start()
     {
         
@@ -17,7 +18,7 @@ public class controlerplayes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxis("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
         body.velocity = new Vector2 (horizontal * speed, body.velocity.y);
 
         groundCheck = Physics2D.OverlapCircle(foot.position, 0.005f);
@@ -25,6 +26,19 @@ public class controlerplayes : MonoBehaviour
         if (Input.GetButtonDown("Jump") && groundCheck)
         {
             body.AddForce(new Vector2(0, jumpStrenght * 100));
+            anim.SetInteger("idle", 2);
         }
+        if (groundCheck)
+        {
+            if (horizontal == 1 || horizontal == -1)
+            {
+                anim.SetInteger("idle", 1);
+            }
+        }
+        if( horizontal == 0)
+        {
+            anim.SetInteger("idle", 0);
+        }
+        
     }
 }
