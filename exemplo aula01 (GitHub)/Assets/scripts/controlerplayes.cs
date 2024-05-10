@@ -30,6 +30,7 @@ public class controlerplayes : MonoBehaviour
         }
         if (groundCheck)
         {
+
             if (horizontal == 1 || horizontal == -1)
             {
                 anim.SetInteger("idle", 1);
@@ -38,6 +39,12 @@ public class controlerplayes : MonoBehaviour
         if( horizontal == 0)
         {
             anim.SetInteger("idle", 0);
+        }
+        if (!groundCheck)
+        {
+
+            anim.SetInteger("idle", 3);
+
         }
         
     }
